@@ -94,4 +94,37 @@ $ git push --set-upstream origin --all
 $ git push --set-upstream origin --tags
 ```
 
-# Enjoy !!!
+# Fetch new changes from SVN repository
+
+If new commits have been added into the SVN repository it may be useful to push them onto the git repository.
+
+Here is the procedure to do it
+
+## Clone the git repository
+
+Retrieve the remote git repository
+
+`$ git clone <server_url>:<remote_repo>`
+
+And configure the SVN repository once into it
+
+`$ git svn init <svn_url> --authors-file=users.txt --tags=<tags_path> --branches=<branches_path> --trunk=<trunk_path>`
+
+**NOTE:**
+- Don't forget to specify the authors file otherwise new commits won't be associated to git users (i.e. As mentioned above at step **Create a local git repository from svn repository**)
+
+## Get the changes
+
+Once the git repo has been configured to retrieve changes from the SVN repo, checkout the branch on which the changes have been committed
+
+`git checkout <branch>`
+
+And get the changes 
+
+`git svn rebase`
+
+## Push retrieved changes
+
+After rebasing the branch from SVN commits, push the local modifications to the configured remote repository
+
+`git push origin`
