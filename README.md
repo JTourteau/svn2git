@@ -128,3 +128,41 @@ And get the changes
 After rebasing the branch from SVN commits, push the local modifications to the configured remote repository
 
 `git push origin`
+
+# Fetch new branch from SVN repository
+
+If a new branch have been added into the SVN repository it may be useful to fetch it onto the git repository.
+
+Here is the procedure to do it
+
+## Clone the git repository
+
+As above
+
+**NOTE:**
+- As mentioned above at step **Clone the git repository**
+
+## Manually add the remote branch
+
+Once the git repo has been configured to retrieve new branch from the SVN repo, create the references to the remote branch manually.
+
+```
+git config --add svn-remote.<branch_name>.url <svn_branch_url>
+git config --add svn-remote.<branch_name>.fetch :refs/remotes/<branch_name>
+```
+
+## Fetch the new branch
+
+After configuring the remote branch into the git repo, fetch the branch.
+
+`git svn fetch <branch_name>`
+
+## Push the retrieved branch
+
+Once the new branch as been fetched, checkout the branch
+
+`git checkout -b <branch_name> <branch_name>`
+
+And push the new branch to the remote git repository
+
+`git push origin <branch_name>`
